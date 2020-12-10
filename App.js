@@ -1,20 +1,27 @@
-import React from 'react';
-import Main from './components/MainComponent';
-import { Provider } from 'react-redux';
-import { ConfigureStore } from './redux/configureStore';
-import { PersistGate } from 'redux-persist/es/integration/react';
-import Loading from './components/LoadingComponent';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { WebView } from "react-native-webview";
 
-const { persistor, store } = ConfigureStore();
-
-export default function App() {
-    return (
-        <Provider store={store}>
-            <PersistGate
-                loading={<Loading />}
-                persistor={persistor}>
-                <Main />
-            </PersistGate>
-        </Provider>
+export default class App extends Component {
+render() {
+  return (
+    <View style={styles.Container}>
+      <WebView
+        style={ styles.WebViewStyle }
+        source={{ uri: 'https://www.youtube.com' }}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}   
+      />
+    </View>
     );
+  }
 }
+
+const styles = StyleSheet.create({
+  Container: {
+    flex: 1
+  },
+  WebViewStyle: {
+    margin: 20
+  }
+});
